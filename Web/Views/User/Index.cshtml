@@ -1,0 +1,74 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <title>用户中心</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" /><!--加载单个css文件-->
+    @*添加jquery easyui样式*@
+    @Styles.Render("~/Content/jquery-easyui-1.4.1/themes/default/easyui.css", "~/Content/jquery-easyui-1.4.1/themes/icon.css") <!--可以加载多个css文件-->
+    @*添加js*@
+    @Scripts.Render("~/Scripts/jquery-1.10.2.min.js", "~/Content/jquery-easyui-1.4.1/jquery.easyui.min.js", "~/Content/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js")
+    <script src="@Url.Content("~/Content/datepattern.js")"></script><!--加载单个js文件-->
+    <script type="text/javascript">
+        $(function () {
+            initTable();
+        })
+
+        //实现对dataGird控件的绑定操作
+        function initTable() {
+            $("#uesrlist").datagrid({ //定位到ID为test的Table标签中
+                url: "/User/GetAllUserInfos",
+                title: "用户的展示",
+                iconCls: "icon_save",
+                width: 600,
+                height: 300,
+                nowrap: true,
+                autoRowHeight: false,
+                striped: true,
+                collapsible: true,
+                pagination: true,
+                rownumbers: true,
+                sortName: 'Id',
+                sortOrder: 'desc',
+                remoteSort: false,
+                idField: 'Id',
+                frozenColumns: [[
+                    { field: 'ck', checkbox: true },
+                    { title: '主键', field: 'Id', width: 80, sortable: true },
+                    { title: '用户名', field: 'UserName', width: 120, sortable: true },
+                    { title: '密码', field: 'Pwd', width: 100, sortable: true }
+                ]],
+                toolbar: [{
+                    id: 'btnadd',
+                    text: '添加',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        $('#btnsave').linkbutton('enable');
+                    }
+                }, {
+                    id: 'btncut',
+                    text: '修改',
+                    iconCls: 'icon-cut',
+                    handler: function () {
+                        $('#btncut').linkbutton('enable');
+                    }
+
+                }, '-', {
+                    id: '删除',
+                    text: 'Save',
+                    iconCls: 'icon-cancel',
+                }]
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <table id="uesrlist" style="width:940px;" title="用户操作" iconcls="icon_edit"></table>
+</body>
+</html>
+
