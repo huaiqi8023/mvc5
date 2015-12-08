@@ -1,4 +1,4 @@
-﻿using Devin.IDataAccess.IBaseRepository;
+﻿using Devin.IDataAccess.IBaseDataAccess;
 using Devin.Models;
 using System;
 using System.Collections.Generic;

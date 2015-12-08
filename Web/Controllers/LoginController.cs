@@ -12,11 +12,11 @@ namespace Web.Controllers
 {
     public class LoginController : Controller
     {
-        Idt_managerService _iManagerServer = new dt_managerService();
+        Idt_managerService _iManagerServer =  ServiceFactory.dt_managerService;
         // GET: Login
         public ActionResult Index()
         {
-            var UserName = Request.Cookies["UserName"] != null ? Request.Cookies["UserName"].ToString() : "";
+            var UserName = Request.Cookies["UserName"] != null ? Request.Cookies["UserName"].Value : "";
             ViewBag.UserName = UserName;
             return View();
         }
@@ -42,7 +42,20 @@ namespace Web.Controllers
             {
                 return Content("请输入正确的验证码");
             }
+            //获取密钥加密
+            string salt = _iManagerServer.LoadEntities(m => m.user_name == admin.user_name && m.is_lock == 0).FirstOrDefault().salt;
+            //根据密钥加密
+            string password = DESEncrypt.Encrypt(admin.password, salt);
+            //检验用户名和密码
+            dt_manager _admin = _iManagerServer.LoadEntities(m => m.user_name == admin.user_name && m.password == password && m.is_lock == 0).FirstOrDefault();
+            if (_admin != null)
+            {
+                Session["admin"] = _admin;
+                return Content("Success");
+            }
+            return Content("用户名密码错误，请您检查");
         }
+
         /// <summary>
         /// 验证码的校验
         /// </summary>

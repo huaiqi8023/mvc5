@@ -40,6 +40,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBaseService\IBaseService.cs" />
+    <Compile Include="Idt_managerService.cs" />
+    <Compile Include="IModelService.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IModelService.tt</DependentUpon>
+    </Compile>
     <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -48,6 +54,15 @@
       <Project>{5a304e01-bbff-42b6-88ce-6d88dc88e99b}</Project>
       <Name>Devin.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="IModelService.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IModelService.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

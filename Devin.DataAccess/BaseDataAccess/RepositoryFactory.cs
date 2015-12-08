@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Devin.DataAccess.BaseDataAccess
 {
-    public static class RepositoryFactory
+    public static partial class RepositoryFactory
     {
         public static IUserRepository UserRepository
         {

@@ -16,7 +16,7 @@ namespace Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }// 参数默认值 (UrlParameter.Optional-可选的意思) );
             );
         }
     }

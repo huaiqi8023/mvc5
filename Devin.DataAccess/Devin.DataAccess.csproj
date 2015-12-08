@@ -30,11 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -49,10 +51,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDataAccess\BaseRepository.cs" />
-    <Compile Include="BaseDataAccess\DbSession.cs" />
     <Compile Include="BaseDataAccess\EFContextFactory.cs" />
-    <Compile Include="BaseDataAccess\RepositoryFactory.cs" />
+    <Compile Include="BaseDataAccess\RepositoryFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DbSession.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbSession.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbSessionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="RepositoryFactory.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepositoryFactory.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +87,21 @@
       <Project>{5a304e01-bbff-42b6-88ce-6d88dc88e99b}</Project>
       <Name>Devin.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DbSession.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DbSession.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Repository.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Repository.cs</LastGenOutput>
+    </None>
+    <None Include="RepositoryFactory.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RepositoryFactory.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

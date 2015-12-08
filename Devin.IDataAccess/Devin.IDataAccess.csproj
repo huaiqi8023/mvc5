@@ -40,7 +40,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBaseRepository\IBaseRepository.cs" />
-    <Compile Include="IBaseRepository\IDbSession.cs" />
+    <Compile Include="IDbSession.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IDbSession.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IRepository.tt</DependentUpon>
+    </Compile>
     <Compile Include="IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -49,6 +58,19 @@
       <Project>{5a304e01-bbff-42b6-88ce-6d88dc88e99b}</Project>
       <Name>Devin.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="IDbSession.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IDbSession.cs</LastGenOutput>
+    </None>
+    <None Include="IRepository.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IRepository.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

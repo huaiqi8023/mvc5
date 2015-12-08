@@ -5,9 +5,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Devin.IDataAccess.IBaseRepository
+namespace Devin.IDataAccess.IBaseDataAccess
 {
-    public interface IBaseRepository<T> where T : class,new()
+    public interface IBaseRepository<T> where T : class
     {
 
         /// <summary>

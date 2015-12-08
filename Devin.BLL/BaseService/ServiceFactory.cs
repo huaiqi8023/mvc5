@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Devin.BLL.BaseService
 {
-    public static class ServiceFactory
+    public static  class ServiceFactory
     {
         public static IUserService UserService
         {

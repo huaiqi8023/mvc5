@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Devin.IDataAccess;
 using Devin.Models;
-using Devin.IDataAccess.IBaseRepository;
+using Devin.IDataAccess.IBaseDataAccess;
 using System.Data;
 using System.Linq.Expressions;
+using System.Data.Entity;
 
 namespace Devin.DataAccess.BaseDataAccess
 {
@@ -22,14 +23,14 @@ namespace Devin.DataAccess.BaseDataAccess
         /// 创建EF框架的上下文
         /// EF上下文的实例保证线程唯一
         /// </summary>
-        //protected DevinDBContext _nContext = new DevinDBContext();
+        //protected DbContext _nContext = new DevinDBContext();
 
 
         //第二种方法
         /// <summary>
         /// 获取的是当前线程内部的上下文实例，而且保证了线程内上下文唯一
         /// </summary>
-        private readonly DevinDBContext _nContext = EFContextFactory.GetCurrentDbContext();
+        private readonly DbContext _nContext = EFContextFactory.GetCurrentDbContext();
 
         public IQueryable<T> Entities
         {

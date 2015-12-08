@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Devin.IDataAccess.IBaseRepository;
-using System.Linq.Expressions;
-using Devin.DataAccess.BaseDataAccess;
 using Devin.IDataAccess.IBaseDataAccess;
+using System.Linq.Expressions;
+using Devin.DataAccess;
+using Devin.DataAccess.BaseDataAccess;
+using Devin.IDataAccess;
 
 namespace Devin.BLL.BaseService
 {
-    public abstract class BaseService<T> where T : class,new()
+    public abstract class BaseService<T> where T : class ///若是所有将使用同一Model类的基类泛型类型的T，必须保证这些类型的对 T 的约束保持一致，如：IBaseRepository<T>
     {
         /// <summary>
         /// DBSession的存放
@@ -39,14 +40,14 @@ namespace Devin.BLL.BaseService
         public abstract void SetCurrentRepository();
 
         /// <summary>
-        /// 实现对数据库的添加功能，添加实现EF框架的引用
+        /// 实现对数据库的添加功能，添加实现EF框架的引用 
         /// </summary>
         /// <param name="entity">实体类</param>
         /// <returns>最后返回对象的实体类型</returns>
-        public T AddEntity(T entity)
+        public virtual T AddEntity(T entity)
         {
-            var AddEntity = CurrentRepository.AddEntity(entity);
-            return _DbSession.SaveChanges() > 0 ? AddEntity : null;
+               return CurrentRepository.AddEntity(entity);
+          //  return _DbSession.SaveChanges() > 0 ? AddEntity : null;
         }
 
         /// <summary>
@@ -54,10 +55,10 @@ namespace Devin.BLL.BaseService
         /// </summary>
         /// <param name="entity">实体类</param>
         /// <returns>返回是否执行成功，如果执行成功则返回true，否则返回false</returns>
-        public bool UpdateEntity(T entity)
+        public virtual bool UpdateEntity(T entity)
         {
-            CurrentRepository.UpdateEntity(entity);
-            return _DbSession.SaveChanges() > 0 ? true : false;
+           return CurrentRepository.UpdateEntity(entity);
+           // return _DbSession.SaveChanges() > 0 ? true : false;
         }
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace Devin.BLL.BaseService
         /// </summary>
         /// <param name="anylambda">查询条件</param>
         /// <returns>如果存在记录则返回true，否则返回false</returns>
-        public bool Exists(Expression<Func<T, bool>> anylambda)
+        public virtual bool Exists(Expression<Func<T, bool>> anylambda)
         {
             return CurrentRepository.Exists(anylambda);
         }
@@ -75,7 +76,7 @@ namespace Devin.BLL.BaseService
         /// </summary>
         /// <param name="pressionlambda">查询条件</param>
         /// <returns>返回总记录</returns>
-        public int Count(Expression<Func<T, bool>> pressionlambda)
+        public virtual int Count(Expression<Func<T, bool>> pressionlambda)
         {
             return CurrentRepository.Count(pressionlambda);
         }
@@ -85,16 +86,16 @@ namespace Devin.BLL.BaseService
         /// </summary>
         /// <param name="entity">实体类</param>
         /// <returns>执行成功则返回true，否则返回false</returns>
-        public bool DeleteEntity(T entity)
+        public virtual bool DeleteEntity(T entity)
         {
-            CurrentRepository.DeleteEntity(entity);
-            return _DbSession.SaveChanges() > 0 ? true : false;
+         return   CurrentRepository.DeleteEntity(entity);
+           // return _DbSession.SaveChanges() > 0 ? true : false;
         }
 
-        public bool DeleteBy(Expression<Func<T, bool>> wherelambda)
+        public virtual bool DeleteBy(Expression<Func<T, bool>> wherelambda)
         {
-            CurrentRepository.DeleteBy(wherelambda);
-            return _DbSession.SaveChanges() > 0 ? true : false;
+         return   CurrentRepository.DeleteBy(wherelambda);
+           // return _DbSession.SaveChanges() > 0 ? true : false;
         }
 
         /// <summary>
@@ -102,7 +103,7 @@ namespace Devin.BLL.BaseService
         /// </summary>
         /// <param name="wherelambda">查询实体类的条件</param>
         /// <returns>返回一个实体类</returns>
-        public T FindEntity(Expression<Func<T, bool>> wherelambda)
+        public virtual T FindEntity(Expression<Func<T, bool>> wherelambda)
         {
             return CurrentRepository.FindEntity(wherelambda);
         }
@@ -112,7 +113,7 @@ namespace Devin.BLL.BaseService
         /// </summary>
         /// <param name="wherelambda">查询的简单条件</param>
         /// <returns>返回一个实体类的IQueryable集合</returns>
-        public IQueryable<T> LoadEntities(Expression<Func<T, bool>> wherelambda)
+        public virtual IQueryable<T> LoadEntities(Expression<Func<T, bool>> wherelambda)
         {
             return CurrentRepository.LoadEntities(wherelambda);
         }
@@ -125,7 +126,7 @@ namespace Devin.BLL.BaseService
         /// <param name="isAsc">如何排序，根据倒序还是升序</param>
         /// <param name="orderlambda">根据哪个字段进行排序</param>
         /// <returns>返回一个实体类型的IQueryable集合</returns>
-        public IQueryable<T> FindList<S>(Expression<Func<T, bool>> wherelambda, bool isAsc, Expression<Func<T, S>> orderlambda)
+        public virtual IQueryable<T> FindList<S>(Expression<Func<T, bool>> wherelambda, bool isAsc, Expression<Func<T, S>> orderlambda)
         {
             return CurrentRepository.FindList(wherelambda, isAsc, orderlambda);
         }
@@ -141,7 +142,7 @@ namespace Devin.BLL.BaseService
         /// <param name="isAsc">根据倒序还是升序排序</param>
         /// <param name="orderlambda">根据哪个字段进行排序</param>
         /// <returns>返回一个实体类型的IQueryable的集合</returns>
-        public IQueryable<T> FindPageList<S>(int pageIndex, int pageSize, out int totalRecord, Expression<Func<T, bool>> wherelambda, bool isAsc, Expression<Func<T, S>> orderlambda)
+        public virtual IQueryable<T> FindPageList<S>(int pageIndex, int pageSize, out int totalRecord, Expression<Func<T, bool>> wherelambda, bool isAsc, Expression<Func<T, S>> orderlambda)
         {
             return CurrentRepository.FindPageList(pageIndex, pageSize, out totalRecord, wherelambda, isAsc, orderlambda);
         }
