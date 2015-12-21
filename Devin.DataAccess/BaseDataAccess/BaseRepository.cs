@@ -48,7 +48,8 @@ namespace Devin.DataAccess.BaseDataAccess
             //db.CreateObjectSet<T>().AddObject(entity);
             _nContext.Set<T>().Add(entity);
             _nContext.Entry<T>(entity).State = System.Data.Entity.EntityState.Added;
-            return _nContext.SaveChanges() > 0 ? entity : null;
+            return entity;//修改后
+            //return _nContext.SaveChanges() > 0 ? entity : null;//修改之前
         }
 
         /// <summary>
@@ -63,7 +64,8 @@ namespace Devin.DataAccess.BaseDataAccess
             //db.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
             _nContext.Set<T>().Attach(entity);
             _nContext.Entry<T>(entity).State = System.Data.Entity.EntityState.Modified;
-            return _nContext.SaveChanges() > 0 ? true : false;
+            return true;//修改之后
+            //return _nContext.SaveChanges() > 0 ? true : false;//修改之前
         }
 
         /// <summary>
@@ -98,7 +100,8 @@ namespace Devin.DataAccess.BaseDataAccess
             //db.ObjectStateManager.ChangeObjectState(entity, EntityState.Deleted);
             _nContext.Set<T>().Attach(entity);
             _nContext.Entry<T>(entity).State = System.Data.Entity.EntityState.Deleted;
-            return _nContext.SaveChanges() > 0 ? true : false;
+            return true;//修改之后
+            //return _nContext.SaveChanges() > 0 ? true : false;//修改之前
         }
 
         public bool DeleteBy(Expression<Func<T, bool>> wherelambda)
@@ -113,8 +116,7 @@ namespace Devin.DataAccess.BaseDataAccess
         /// <returns>返回一个实体类</returns>
         public T FindEntity(Expression<Func<T, bool>> wherelambda)
         {
-            T _entity = _nContext.Set<T>().FirstOrDefault<T>(wherelambda);
-            return _entity;
+            return _nContext.Set<T>().FirstOrDefault<T>(wherelambda);
         }
 
         /// <summary>

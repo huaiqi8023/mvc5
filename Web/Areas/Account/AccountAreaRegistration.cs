@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Web.Areas.a
+namespace Web.Areas.Account
 {
     public class aAreaRegistration : AreaRegistration 
     {
@@ -8,15 +8,15 @@ namespace Web.Areas.a
         {
             get 
             {
-                return "a";
+                return "Account";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "a_default",
-                "a/{controller}/{action}/{id}",
+                "Account_default",
+                "Account/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

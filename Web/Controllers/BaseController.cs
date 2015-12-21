@@ -11,6 +11,11 @@ namespace Web.Controllers
 {
     public class BaseController : Controller
     {
+        public BaseController()
+        {
+
+        }
+
         private Idt_managerService _current = new dt_managerService();
         public dt_manager CurrentUser { get; set; }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

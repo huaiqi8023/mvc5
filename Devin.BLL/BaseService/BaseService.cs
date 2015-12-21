@@ -46,8 +46,8 @@ namespace Devin.BLL.BaseService
         /// <returns>最后返回对象的实体类型</returns>
         public virtual T AddEntity(T entity)
         {
-               return CurrentRepository.AddEntity(entity);
-          //  return _DbSession.SaveChanges() > 0 ? AddEntity : null;
+            CurrentRepository.AddEntity(entity);
+            return _DbSession.SaveChanges() > 0 ? entity : null;
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace Devin.BLL.BaseService
         /// <returns>返回是否执行成功，如果执行成功则返回true，否则返回false</returns>
         public virtual bool UpdateEntity(T entity)
         {
-           return CurrentRepository.UpdateEntity(entity);
-           // return _DbSession.SaveChanges() > 0 ? true : false;
+            CurrentRepository.UpdateEntity(entity);
+            return _DbSession.SaveChanges() > 0 ? true : false;
         }
 
         /// <summary>
@@ -88,14 +88,14 @@ namespace Devin.BLL.BaseService
         /// <returns>执行成功则返回true，否则返回false</returns>
         public virtual bool DeleteEntity(T entity)
         {
-         return   CurrentRepository.DeleteEntity(entity);
-           // return _DbSession.SaveChanges() > 0 ? true : false;
+            CurrentRepository.DeleteEntity(entity);
+            return _DbSession.SaveChanges() > 0 ? true : false;
         }
 
         public virtual bool DeleteBy(Expression<Func<T, bool>> wherelambda)
         {
-         return   CurrentRepository.DeleteBy(wherelambda);
-           // return _DbSession.SaveChanges() > 0 ? true : false;
+            CurrentRepository.DeleteBy(wherelambda);
+            return _DbSession.SaveChanges() > 0 ? true : false;
         }
 
         /// <summary>

@@ -7,7 +7,7 @@ namespace Devin.Models
 
     public partial class DevinDBContext : DbContext
     {
-        public DevinDBContext()
+        public DevinDBContext()           
             : base("name=DBContext")
         {
         }

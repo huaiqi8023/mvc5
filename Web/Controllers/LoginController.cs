@@ -27,10 +27,10 @@ namespace Web.Controllers
         /// <param name="admin"></param>
         /// <param name="Code">验证码</param>
         /// <returns></returns>
-        public ActionResult CheckUserLogin(dt_manager admin, string Code)
+        public ActionResult CheckUserLogin(dt_manager admin, string Code,bool ischecked)
         {
             ///把用户存放Cookie里
-            if (admin.user_name != null && admin.user_name != "")
+            if (admin.user_name != null && admin.user_name != ""&&ischecked==true)
             {
                 Response.Cookies["UserName"].Value = admin.user_name;
                 Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(7);

@@ -41,9 +41,9 @@
   <ItemGroup>
     <Compile Include="IBaseRepository\IBaseRepository.cs" />
     <Compile Include="IDbSession.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>IDbSession.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="IRepository.cs">
       <AutoGen>True</AutoGen>
