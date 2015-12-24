@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -51,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDataAccess\BaseRepository.cs" />
+    <Compile Include="BaseDataAccess\DBContext.cs" />
     <Compile Include="BaseDataAccess\EFContextFactory.cs" />
     <Compile Include="BaseDataAccess\RepositoryFactory.cs">
       <SubType>Code</SubType>
