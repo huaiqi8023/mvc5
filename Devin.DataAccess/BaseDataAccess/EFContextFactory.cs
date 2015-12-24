@@ -23,7 +23,8 @@ namespace Devin.DataAccess.BaseDataAccess
             DbContext _dbContext = CallContext.GetData("DBContext") as DbContext;//DBContext上下文
             if (_dbContext == null)//线程在数据槽里面没有此上下文
             {
-                _dbContext = new DevinDBContext();//创建一个EF上下文　
+               // _dbContext = new DevinDBContext();//创建一个EF上下文　
+                _dbContext = new DBContext();
                 CallContext.SetData("DBContext", _dbContext);//放到数据槽中去
             }
             return _dbContext;
